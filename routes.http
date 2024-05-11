@@ -1,0 +1,18 @@
+POST http://localhost:3000/api/v1/books
+Content-Type: application/json
+
+{ 
+    "name": "heber",
+    "email": "email@email",
+     "tracking_code": "AH18NBH3",
+     "books": [
+    {
+      "name": "teste de livros 1",
+      "book_id": "1234ASD1"
+    },
+    {
+      "name": "teste de livros 2",
+      "book_id": "1234ASD2"
+    }
+  ]
+}
