@@ -3,8 +3,8 @@ Content-Type: application/json
 
 { 
     "name": "heber",
-    "email": "email@email",
-     "tracking_code": "AH18NBH3",
+    "email": "email@email1",
+     "tracking_code": "AH18NBH4",
      "books": [
     {
       "name": "teste de livros 1",
@@ -16,3 +16,6 @@ Content-Type: application/json
     }
   ]
 }
+
+###
+GET http://localhost:3000/api/v1/book/8a457d93-5b75-46a1-8b7b-de285c474a8b
