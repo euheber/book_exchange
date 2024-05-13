@@ -1,5 +1,5 @@
 import prisma from "../lib/prismaClient.js"
-import voucherGenegerator from "../utils/generate-voucher.js"
+
 async function register_books(req, res) {
     const { name, email, tracking_code, books } = req.body
     
@@ -17,8 +17,7 @@ async function register_books(req, res) {
             userId: user.id
         }
     })
-    const vouchers = await voucherGenegerator(editedBooks)
-    console.log(vouchers)
+
     await prisma.books.createMany({data: editedBooks})
     
     res.status(200)

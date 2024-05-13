@@ -1,18 +1,17 @@
-const voucherGenegerator = async (arrayOfBooks) => {
-
-
-    const generateVoucher = ()=> {
-        let voucher = '';
-        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        for (let i = 0; i < 12; i++) {
-            voucher += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            if ((i + 1) % 4 === 0 && i !== 11) {
-                voucher += '-';
-            }
+const generateVoucher = ()=> {
+    let voucher = '';
+    const voucherCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for (let i = 0; i < 12; i++) {
+        voucher += voucherCharacters.charAt(Math.floor(Math.random() * voucherCharacters.length));
+        if ((i + 1) % 4 === 0 && i !== 11) {
+            voucher += '-';
         }
-        return voucher;
     }
-   
+    return voucher;
+}
+
+
+const voucherGenegerator = async (arrayOfBooks) => {
 
     if (arrayOfBooks.length > 1) {
         return arrayOfBooks.map(book => `${book.name} - ${generateVoucher()}`).join('\n');
