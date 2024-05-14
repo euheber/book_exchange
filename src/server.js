@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import routes from "./routes/routes.js"
-import errorHandlerMiddleware from './middleware/error_handler.js'
 import notFound from './middleware/notFound.js'
+import errorHandlerMiddleware from './middleware/error_handler.js'
 
 const app = express()
 
