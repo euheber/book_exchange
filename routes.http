@@ -3,8 +3,8 @@ Content-Type: application/json
 
 { 
     "name": "heber",
-    "email": "email@email1",
-     "tracking_code": "AH18NBH",
+    "email": "email@email11",
+     "tracking_code": "AH18NBHH11",
      "books": [
     {
       "name": "teste de livros 1",
