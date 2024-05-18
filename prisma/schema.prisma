@@ -20,10 +20,11 @@ model User {
 }
 
 model Books {
-  book_id String @id
-  name    String
-  userId  String
-  User    User   @relation(fields: [userId], references: [id])
+  book_id   String @id
+  name      String
+  userId    String
+  publisher String
+  User      User   @relation(fields: [userId], references: [id])
 }
 
 model DigitalBooks {

@@ -1,20 +1,11 @@
-import prisma from "../lib/prismaClient"
+import { StatusCodes } from "http-status-codes"
+import prisma from "../lib/prismaClient.js"
 
 const register_books = async (req, res) => { 
-        const {books, id} = req.body
-        
-        await prisma.user.findUnique({ 
-          where:{ 
-            id
-          }
-        })
-
-          const editedBooks = books.map(book => { 
-        return { 
-            ...book, 
-            userId: user.id
-        }
-    })
+        const {books, userId} = req.body
+        console.log(books, userId)
+ 
+        const editedBooks = books.map(book => {return { ...book, userId}})
 
     await prisma.books.createMany({data: editedBooks})
     res.status(StatusCodes.OK).send("user registered")

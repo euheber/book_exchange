@@ -12,8 +12,6 @@ const transporter = nodemailer.createTransport({
 })
 
 
-
-
 const sendEmail =   (userEmail) => {
 
     const emailConfig = { 
