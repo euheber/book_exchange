@@ -1,21 +1,11 @@
-POST http://localhost:3000/api/v1/books
+POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 { 
-    "name": "heber",
+    "name": "Heber Robert",
     "email": "euheber1@gmail.com",
-     "tracking_code": "AH18NBHH11",
-     "books": [
-    {
-      "name": "teste de livros 1",
-      "book_id": "1234ASD1"
-    },
-    {
-      "name": "teste de livros 2",
-      "book_id": "1234ASD2"
-    }
-  ]
+    "tracking_code": "AH18NBHH"
 }
 
 ###
-GET http://localhost:3000/api/v1/book/8a457d93-5b75-46a1-8b7b-de285c474a8b
+GET http://localhost:3000/api/v1/user/3a33c5f6-9aa7-423d-b397-b835edd46b8b
