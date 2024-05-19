@@ -1,5 +1,5 @@
-import badRequest from "./badRequest";
-import customErrors from "./customErrors";
+import customErrors from "./customErrors.js";
+import badRequest from "./badRequest.js";
 
 
-export default { customErrors, badRequest }
+export { customErrors, badRequest } 

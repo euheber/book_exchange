@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
 })
 
 
-const sendEmail =   (userEmail) => {
-
+const sendEmail = (userEmail) => {
+    
     const emailConfig = { 
         from: `quasedev <${process.env.USER}>`,
         to: `${userEmail}`,
