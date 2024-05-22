@@ -8,7 +8,7 @@ const register_books = async (req, res, next) => {
     if (!userId) {
         return next(new badRequest("Você precisa preencher todos os campos"))
     }
-   
+    
     if(books.length > 0 ) { 
         books.forEach(book => { 
             if( !book.name  || !book.book_id || !book.publisher) {
@@ -18,7 +18,7 @@ const register_books = async (req, res, next) => {
     } 
 
     const editedBooks = books.map(book => { return { ...book, userId } })
-
+    
     await prisma.books.createMany({ data: editedBooks })
     res.status(StatusCodes.OK).send("Livros cadastrados")
 }

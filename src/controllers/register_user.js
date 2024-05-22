@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client"
 import { badRequest } from "../errors/index.js"
+import sendEmail from "../utils/send_email_confirmation.js"
 import prisma from "../lib/prismaClient.js"
 
 async function register_books(req, res, next) {
@@ -9,8 +10,8 @@ async function register_books(req, res, next) {
     }
     try {
         const user = await prisma.user.create({ data: { name, email, tracking_code } })
-
-        res.status(200).send(`Aqui está o seu id: ${user.id}. Não perca este identificador ou não conseguirá ter acesso aos seus dados na nossa plataforma`)
+        sendEmail(user.email)
+        res.status(200).send("Enviamos um email com os dados para confirmação do cadastro.")
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             if (e.code === 'P2002') {
