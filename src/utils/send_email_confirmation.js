@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer"
+import jwt from "jsonwebtoken"
+
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -12,25 +14,28 @@ const transporter = nodemailer.createTransport({
 })
 
 
-const sendEmail = (userEmail) => {
-    
+const sendEmail = async (userEmail) => {
+    const token = jwt.sign({data:userEmail}, process.env.SECRET , {expiresIn: '24h'})
+
     const emailConfig = { 
-        from: `quasedev <${process.env.USER}>`,
+        from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
-        subject: "email testing",
-        html: "<h1>Este é apenas um teste para confirmação de email.</h1>",
-        text: "apenas testando a confirmação de email"
+        subject: "Confirmação de cadastro",
+        html: `Aqui está o seu token de acesso: ${token}`,
     }
     
 
-    transporter.sendMail(emailConfig, (error, info) => { 
-        if(error){ 
-            console.log(error);
-        } else { 
-            console.log("email enviado com sucesso", info)
-        }
+    return new Promise((resolve, reject) => { 
+        transporter.sendMail(emailConfig, (error, info) => { 
+            if(error){ 
+                console.error(error)
+                reject(new Error("Erro ao enviar o email."))
+            } else { 
+                resolve(token)
+            }
+        })
     })
-    return `enviamos um email para ${process.env.USER}`
+
 }
 
 

@@ -36,3 +36,5 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/v1/user/3a33c5f6-9aa7-423d-b397-b835edd46b8b
+###
+GET http://localhost:3000/api/v1/info

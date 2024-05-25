@@ -1,6 +1,6 @@
-import register_user from "../controllers/register_user.js"
-import getUserInfo from "../controllers/get_user_info.js"
-import register_books from "../controllers/register_book.js"
+import register_user from "../controllers/register_user.js";
+import getUserInfo from "../controllers/get_user_info.js";
+import register_books from "../controllers/register_book.js";
 import recycled_info from "../controllers/books_recycled.js";
 import { Router } from "express";
 
