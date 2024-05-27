@@ -10,7 +10,7 @@ async function register_books(req, res, next) {
     }
     try {
         const user = await prisma.user.create({ data: { name, email, tracking_code } })
-        sendEmail(user.email)
+        await sendEmail(user.email)
         res.status(200).send("Enviamos um email com os dados para confirmação do cadastro.")
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {

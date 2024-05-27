@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer"
-import jwt from "jsonwebtoken"
-
+import generateToken from "./generate_token.js"
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -14,21 +13,22 @@ const transporter = nodemailer.createTransport({
 })
 
 
-const sendEmail = async (userEmail) => {
-    const token = jwt.sign({data:userEmail}, process.env.SECRET , {expiresIn: '24h'})
 
+const sendEmail = async (userEmail) => {
+    const token = await generateToken(userEmail)
+
+    const link = `http://localhost:3000/api/v1/user/emailconfirm/${token}`
     const emailConfig = { 
         from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
         subject: "Confirmação de cadastro",
-        html: `Aqui está o seu token de acesso: ${token}`,
+        html: `Clique <a href=${link}>aqui</a> pra confirmar seu cadastro`,
     }
     
 
     return new Promise((resolve, reject) => { 
         transporter.sendMail(emailConfig, (error, info) => { 
             if(error){ 
-                console.error(error)
                 reject(new Error("Erro ao enviar o email."))
             } else { 
                 resolve(token)

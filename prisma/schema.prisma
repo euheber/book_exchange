@@ -16,7 +16,8 @@ model User {
   name          String
   tracking_code String  @unique
   validation    Boolean @default(false)
-  books         Books[]
+
+  books Books[]
 }
 
 model Books {
