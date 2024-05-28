@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes"
 import prisma from "../lib/prismaClient.js"
 import sendEmail from "../utils/send_email_confirmation.js"
-import jwt from "jsonwebtoken"
+
 
 const get_recycled_info = async (req, res) => {
     const token = await sendEmail("euheber1@gmail.com")

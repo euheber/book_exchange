@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer"
-import generateToken from "./generate_token.js"
+import generateVerificationCode from "./generate_verification_code.js"
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -15,9 +15,10 @@ const transporter = nodemailer.createTransport({
 
 
 const sendEmail = async (userEmail) => {
-    const token = await generateToken(userEmail)
 
-    const link = `http://localhost:3000/api/v1/user/emailconfirm/${token}`
+    const code = await generateVerificationCode()
+
+    const link = `http://localhost:3000/api/v1/user/confirmUser/${code}`
     const emailConfig = { 
         from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
@@ -31,7 +32,7 @@ const sendEmail = async (userEmail) => {
             if(error){ 
                 reject(new Error("Erro ao enviar o email."))
             } else { 
-                resolve(token)
+                resolve()
             }
         })
     })
