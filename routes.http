@@ -3,8 +3,7 @@ Content-Type: application/json
 
 { 
     "name": "Heber Robert",
-    "email": "euheber1@gmail.com",
-    "tracking_code": "AH18NBH"
+    "email": "euheber1@gmail.com"
 }
 
 ###
@@ -13,7 +12,7 @@ POST http://localhost:3000/api/v1/book
 Content-Type: application/json
 
 { 
-    "userId": "02c037ff-b04c-44ab-b8c3-9cd50720b757",
+    "userId": "6753c8f6-4404-4401-b90a-bdc39a1f7d82",
     "books": [
      {
       "name": "The Great Gatsby",

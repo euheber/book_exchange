@@ -14,7 +14,7 @@ model User {
   id                String  @unique @default(uuid())
   email             String  @unique
   name              String
-  tracking_code     String  @unique
+  tracking_code     String? @unique @default("")
   validation        Boolean @default(false)
   verification_code String? @unique
   books             Books[]
