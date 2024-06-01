@@ -12,7 +12,7 @@ POST http://localhost:3000/api/v1/book
 Content-Type: application/json
 
 { 
-    "userId": "6753c8f6-4404-4401-b90a-bdc39a1f7d82",
+    "userId": "36e1bc63-c85c-4364-bf27-8c0099eb1e02",
     "books": [
      {
       "name": "The Great Gatsby",
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/api/v1/user/3a33c5f6-9aa7-423d-b397-b835edd46b8b
+GET http://localhost:3000/api/v1/user/36e1bc63-c85c-4364-bf27-8c0099eb1e02
 ###
 GET http://localhost:3000/api/v1/info
 ###
@@ -42,5 +42,5 @@ POST http://localhost:3000/api/v1/user/confirmUser
 Content-Type: application/json
 
 { 
-  "code": "ff675b"
+  "code": "add59d8b767bf9a32f1e0373093f6dc5"
 }

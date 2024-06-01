@@ -1,11 +1,12 @@
 import { StatusCodes } from "http-status-codes"
-import prisma from "../lib/prismaClient.js"
 import { badRequest } from "../errors/index.js"
-
+import prisma from "../lib/prismaClient.js"
 
 const confirmUser = async (req, res, next) => {
     const { code } = req.body
-    console.log(code)
+    if(code === ""){ 
+        next(new badRequest("Você precisa preencher todos os campos"))
+    }
     try {
         await prisma.user.update({
             where: {
@@ -21,8 +22,5 @@ const confirmUser = async (req, res, next) => {
         next(new badRequest("usuário não encontrado"))
     }
 }
-
-
-
 
 export default confirmUser

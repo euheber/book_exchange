@@ -8,7 +8,20 @@ const getUserInfo = async (req, res, next) => {
 
         const user = await prisma.user.findUnique({
             where: { id },
-            include: { _count: true, books: true },
+            select: {
+                id: true,
+                email: true,
+                name: true,
+                tracking_code: true,
+                books: { 
+                    select: {
+                        book_id:true,
+                        name: true,
+                        publisher:true
+                    }
+                }
+            },
+            
         })
 
         if (user != null) {
