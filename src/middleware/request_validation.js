@@ -2,7 +2,7 @@ import { badRequest } from "../errors/index.js";
 
 const request_validation = (req, res, next) => {
     const books =  req.body?.books
-    const keys = Object.keys(req.body).filter(item => req.body[item] === "");
+    const getObjectFields = Object.keys(req.body).filter(item => req.body[item] === "");
     const invalidBooks = []
     
     books.forEach(book => { 
@@ -12,11 +12,11 @@ const request_validation = (req, res, next) => {
     })
 
     if(invalidBooks.length > 0 ) { 
-        next(new badRequest(`Você precisa preencher todos os campos dos livros que serao enviados.`, invalidBooks))
+        next(new badRequest(`Você precisa preencher todos os campos dos livros que serão enviados.`))
     }
 
-    if(keys.length > 0) {
-        next(new badRequest(`Você precisa preencher os campos: ${keys}`))
+    if(getObjectFields.length > 0) {
+        next(new badRequest(`Você precisa preencher os campos: ${getObjectFields}`))
     }
     next()
 }

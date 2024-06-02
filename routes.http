@@ -15,9 +15,9 @@ Content-Type: application/json
     "userId": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3",
     "books": [
      {
-      "name": "",
+      "name": "Lovecraft stories",
       "book_id": "ISBN1234567890",
-      "publisher": "Scribner"
+      "publisher": "Darkside Books"
     },
     {
       "name": "1984",

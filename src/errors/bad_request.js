@@ -3,10 +3,9 @@ import { customErrors } from "./index.js"
 
 
 class badRequest extends customErrors {
-    constructor(message, teste) {
+    constructor(message) {
         super(message)
         this.statusCode = StatusCodes.BAD_REQUEST
-        this.teste = teste
     }
 }
 
