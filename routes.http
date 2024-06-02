@@ -2,8 +2,8 @@ POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 { 
-    "name": "Heber Robert",
-    "email": "euheber1@gmail.com"
+    "name": "",
+    "email": ""
 }
 
 ###
@@ -12,10 +12,10 @@ POST http://localhost:3000/api/v1/book
 Content-Type: application/json
 
 { 
-    "userId": "36e1bc63-c85c-4364-bf27-8c0099eb1e02",
+    "userId": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3",
     "books": [
      {
-      "name": "The Great Gatsby",
+      "name": "",
       "book_id": "ISBN1234567890",
       "publisher": "Scribner"
     },

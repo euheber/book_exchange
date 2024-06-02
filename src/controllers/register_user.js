@@ -7,10 +7,6 @@ import generateVerificationCode from "../utils/generate_verification_code.js"
 async function register_books(req, res, next) {
     const { name, email } = req.body
 
-    if (!name || !email) {
-        return next(new badRequest("Você precisa preencher todos os campos"))
-    } 
-
     try {
         const verification_code = await generateVerificationCode()
         const user = await prisma.user.create({ data: { name, email, verification_code } })

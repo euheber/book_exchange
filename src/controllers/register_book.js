@@ -5,17 +5,17 @@ import prisma from "../lib/prismaClient.js"
 
 const register_books = async (req, res, next) => {
     const { books, userId} = req.body
-    if (!userId) {
-        return next(new badRequest("Você precisa preencher todos os campos"))
-    }
+    // if (!userId) {
+    //     return next(new badRequest("Você precisa preencher todos os campos"))
+    // }
     
-    if(books.length > 0 ) { 
-        books.forEach(book => { 
-            if( !book.name  || !book.book_id || !book.publisher) {
-                return next(new badRequest("Você precisa preencher todos os campos"))
-            }
-        })
-    } 
+    // if(books.length > 0 ) { 
+    //     books.forEach(book => { 
+    //         if( !book.name  || !book.book_id || !book.publisher) {
+    //             return next(new badRequest("Você precisa preencher todos os campos"))
+    //         }
+    //     })
+    // } 
 
     const editedBooks = books.map(book => { return { ...book, userId } })
     
