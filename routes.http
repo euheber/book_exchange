@@ -42,5 +42,5 @@ POST http://localhost:3000/api/v1/user/confirmUser
 Content-Type: application/json
 
 { 
-  "code": "add59d8b767bf9a32f1e0373093f6dc5"
+  "code": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3"
 }

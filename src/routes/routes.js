@@ -11,7 +11,7 @@ const router = Router()
 
 router.post("/book",request_validation, register_books)
 router.post('/user', request_validation, register_user)
-router.post("/user/confirmUser", confirm_user)
+router.post("/user/confirmUser", request_validation, confirm_user)
 router.get('/user/:id', getUserInfo)
 router.get("/info", recycled_info)
 

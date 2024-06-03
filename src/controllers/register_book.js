@@ -6,20 +6,25 @@ import { badRequest } from "../errors/index.js"
 
 const register_books = async (req, res, next) => {
     const { books, userId } = req.body
+
     const editedBooks = books.map(book => { return { ...book, userId } })
 
     try {
-        await prisma.books.createMany({ data: editedBooks })
+        if (editedBooks.length > 1) {
+            await prisma.books.createMany({ data: editedBooks })
+        } else[
+            await prisma.books.create({ data: editedBooks[0] })
+        ]
         res.status(StatusCodes.OK).send("Livros cadastrados")
     } catch (e) {
- 
+
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             if (e.code === "P2003") {
                 next(new badRequest("Id de usuário incorreto ou não existe nos nossos banco de dados"))
             }
-        }else { 
+        } else {
             res.status(StatusCodes.CONFLICT)
-            .json({error: "Tivemos um problema durante a criação do usuário. Tente novamente mais tarde"})
+                .json({ error: "Tivemos um problema durante a criação do usuário. Tente novamente mais tarde" })
         }
     }
 }
