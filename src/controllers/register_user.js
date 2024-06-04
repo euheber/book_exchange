@@ -3,6 +3,7 @@ import { badRequest } from "../errors/index.js"
 import sendEmail from "../utils/send_email_confirmation.js"
 import prisma from "../lib/prismaClient.js"
 import generateVerificationCode from "../utils/generate_verification_code.js"
+import { StatusCodes } from "http-status-codes"
 
 async function register_books(req, res, next) {
     const { name, email } = req.body
@@ -14,6 +15,7 @@ async function register_books(req, res, next) {
         res.status(200).send("Enviamos um email com os dados para confirmação do cadastro.")
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            console.log(e)
             if (e.code === 'P2002') {
                 return next(new badRequest('Usuário já cadastrado'))
             }
@@ -22,6 +24,8 @@ async function register_books(req, res, next) {
         if (e instanceof Prisma.PrismaClientValidationError) {
             return next(new badRequest('Para registrar um usuário, envie apenas os campos: nome, email, e código de verificaçao.'))
         }
+
+        console.log(e)
     }
 }
 

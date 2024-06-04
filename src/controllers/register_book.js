@@ -20,7 +20,7 @@ const register_books = async (req, res, next) => {
 
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             if (e.code === "P2003") {
-                next(new badRequest("Id de usuário incorreto ou não existe nos nossos banco de dados"))
+                next(new badRequest("Id de usuário incorreto ou não existe"))
             }
         } else {
             res.status(StatusCodes.CONFLICT)

@@ -1,5 +1,6 @@
-import { badRequest } from "../errors/index.js";
 
+import { badRequest } from "../errors/index.js";
+import checkEmail from "../utils/check_if_email_is_valid.js"
 const request_validation = (req, res, next) => {
     const { books, ...rest } = req.body;
     const invalidBooks = [];
@@ -17,7 +18,9 @@ const request_validation = (req, res, next) => {
         }
     }
 
-
+    if(!checkEmail(rest?.email)){ 
+        return next(new badRequest("Ofereça um email válido para contato"))
+    }
     const getObjectFields = Object.keys(rest).filter(item => rest[item] === "");
 
     if (getObjectFields.length > 0) {
