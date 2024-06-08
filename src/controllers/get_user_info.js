@@ -9,10 +9,7 @@ const getUserInfo = async (req, res, next) => {
         const user = await prisma.user.findUnique({
             where: { id },
             select: {
-                id: true,
-                email: true,
                 name: true,
-                tracking_code: true,
                 books: { 
                     select: {
                         book_id:true,
@@ -25,7 +22,7 @@ const getUserInfo = async (req, res, next) => {
         })
 
         if (user != null) {
-            res.status(StatusCodes.OK).send(user)
+            res.status(StatusCodes.OK).json(user)
         } else {
             throw new badRequest("Usuário não encontrado.")
         }

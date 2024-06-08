@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer"
 
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -14,7 +15,6 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (userEmail, verification_code) => {
 
-    // const link = `http://localhost:3000/api/v1/user/confirmUser/${verification_code}`
     const emailConfig = {
         from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
@@ -22,11 +22,11 @@ const sendEmail = async (userEmail, verification_code) => {
         html: `Para confirmar seu cadastro na nossa plataforma: ${verification_code}`,
     }
 
-
+    // ! testar se o endereço pode receber emails
     return new Promise((resolve, reject) => {
         transporter.sendMail(emailConfig, (error, info) => {
             if (error) {
-                reject(new Error("Erro ao enviar o email."))
+                reject()
             } else {
                 resolve()
             }

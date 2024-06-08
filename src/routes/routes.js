@@ -9,10 +9,10 @@ import request_validation from "../middleware/request_validation.js";
 
 const router = Router()
 
-router.post("/book",request_validation, register_books)
+router.post("/book", request_validation, register_books)
 router.post('/user', request_validation, register_user)
-router.post("/user/confirmUser", request_validation, confirm_user)
+router.post("/user/email/confirm", request_validation, confirm_user)
 router.get('/user/:id', getUserInfo)
-router.get("/info", recycled_info)
+router.get("/user/info", recycled_info)
 
 export default router
