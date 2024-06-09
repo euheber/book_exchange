@@ -13,16 +13,14 @@ const transporter = nodemailer.createTransport({
 })
 
 
-const sendEmail = async (userEmail, verification_code) => {
-
+const sendEmail = async (userName, userEmail, token) => {
     const emailConfig = {
         from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
         subject: "Confirmação de cadastro",
-        html: `Para confirmar seu cadastro na nossa plataforma: ${verification_code}`,
+        html: `Para confirmar seu cadastro na nossa plataforma: ${token}`,
     }
 
-    // ! testar se o endereço pode receber emails
     return new Promise((resolve, reject) => {
         transporter.sendMail(emailConfig, (error, info) => {
             if (error) {

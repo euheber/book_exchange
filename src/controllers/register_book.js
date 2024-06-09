@@ -15,14 +15,12 @@ const register_books = async (req, res, next) => {
         } else {
             await prisma.books.create({ data: editedBooks[0] })
         }
-        res.status(StatusCodes.OK).json({msg: "Livros cadastrados com sucesso"})
+        res.status(StatusCodes.OK).json({msg: "Livros cadastrados com sucesso", code: `Você pode acompanhar o status do seu pedido com esse código ou acessando seus dados via ID de usuário`})
     } catch (e) {
 
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            if (e.code === "P2003") {
-                next(new badRequest("Id de usuário incorreto ou não existe"))
-            }   
-        }
+        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") next(new badRequest("Id de usuário incorreto ou não existe"))
+              
+        
     }
 }
 

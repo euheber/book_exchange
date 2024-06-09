@@ -2,17 +2,19 @@ import { Prisma } from "@prisma/client"
 import { badRequest } from "../errors/index.js"
 import prisma from "../lib/prismaClient.js"
 import sendEmail from "../utils/send_email_confirmation.js"
-import generateVerificationCode from "../utils/generate_verification_code.js"
+import generateToken from "../utils/generate_token.js"
 
 
 async function register_books(req, res, next) {
     const { name, email } = req.body
-
+    console.log('rota')
     try {
-        const verification_code = await generateVerificationCode()
-        const user = await prisma.user.create({ data: { name, email, verification_code } })
-        await sendEmail(user.email, verification_code)
-        res.status(200).json({msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, link: "Este não é seu email? Clique aqui e atualize"})
+        await prisma.user.create({ data: { name, email } })
+        const token = await generateToken(name, email)
+        console.log(token)
+        await sendEmail(name, email, token)
+
+        res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, link: "Este não é seu email? Clique aqui e atualize" })
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
 
@@ -24,7 +26,7 @@ async function register_books(req, res, next) {
         if (e instanceof Prisma.PrismaClientValidationError) {
             return next(new badRequest('Para registrar um usuário, envie apenas os campos: nome e email.'))
         }
-        
+
     }
 }
 

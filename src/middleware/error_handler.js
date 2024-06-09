@@ -6,7 +6,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         return res.status(err.statusCode).json({error: err.message})
     }
 
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Ops. Parece que tem algo errado com nossos servidores. Tente novamente mais tarde")
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: "Ops. Parece que tem algo errado com nossos servidores. Tente novamente mais tarde"})
 }
 
 
