@@ -2,8 +2,8 @@ POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 { 
-    "name": "",
-    "email": ""
+    "name": "Heber Robert",
+    "email": "euheber1@gmail.com"
 }
 
 ###
@@ -12,7 +12,8 @@ POST http://localhost:3000/api/v1/book
 Content-Type: application/json
 
 { 
-    "userId": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3",
+    "userId": "858f606f-586f-4763-b1e1-dfb42c4b45a1",
+    "tracking_code": "HAS13H8HAS",
     "books": [
      {
       "name": "Lovecraft stories",
@@ -34,13 +35,19 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/api/v1/user/36e1bc63-c85c-4364-bf27-8c0099eb1e02
+GET http://localhost:3000/api/v1/user/858f606f-586f-4763-b1e1-dfb42c4b45a1
 ###
-GET http://localhost:3000/api/v1/info
+GET http://localhost:3000/api/v1/user/info
 ###
-POST http://localhost:3000/api/v1/user/confirmUser
+PATCH http://localhost:3000/api/v1/user/email/confirm
 Content-Type: application/json
 
 { 
   "code": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3"
 }
+
+
+
+
+1 - cadastrar usuário. enviando {nome, email, senha?}
+2 - confirmar usuário via email. e recebe link único para cadastro
