@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
 
-const generateToken = (name, email) => {
-    console.log(name, email)
-    const payload = { name, email };
+const generateToken = (payload) => {
     const secretKey = process.env.SECRET;
-    const options = { expiresIn: '24h' };
+    const options = { expiresIn: '1h' };
     return new Promise((resolve, reject) => {
 
 

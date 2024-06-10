@@ -7,12 +7,11 @@ import generateToken from "../utils/generate_token.js"
 
 async function register_books(req, res, next) {
     const { name, email } = req.body
-    console.log('rota')
+ 
     try {
-        await prisma.user.create({ data: { name, email } })
-        const token = await generateToken(name, email)
-        console.log(token)
-        await sendEmail(name, email, token)
+        const user = await prisma.user.create({ data: { name, email } })
+        const token = await generateToken({name, email, id:user.id})
+        await sendEmail( name, email, token)
 
         res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, link: "Este não é seu email? Clique aqui e atualize" })
     } catch (e) {
