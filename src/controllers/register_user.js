@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client"
 import { badRequest } from "../errors/index.js"
 import prisma from "../lib/prismaClient.js"
-import sendEmail from "../utils/send_email_confirmation.js"
+import sendEmail from "../utils/send_email.js"
 import generateToken from "../utils/generate_token.js"
 
 

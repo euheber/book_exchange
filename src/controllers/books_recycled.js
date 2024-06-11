@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes"
 import prisma from "../lib/prismaClient.js"
-import sendEmail from "../utils/send_email_confirmation.js"
+import sendEmail from "../utils/send_email.js"
 
 
 const get_recycled_info = async (req, res) => {

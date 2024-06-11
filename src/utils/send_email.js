@@ -17,7 +17,7 @@ const sendEmail = async (username, userEmail, token) => {
         from: `Heber <${process.env.USER}>`,
         to: `${userEmail}`,
         subject: "Confirmação de cadastro",
-        html: `Olá, ${username} Para registrar seus livros enviados, clique <a href=${token}>aqui</a>`,
+        html: `Olá, ${username} Para registrar seus livros enviados: ${token}`,
     }
 
     return new Promise((resolve, reject) => {
