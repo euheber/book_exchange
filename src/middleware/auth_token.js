@@ -5,7 +5,6 @@ const auth = (req, res, next) => {
     jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
         if (err) {
 
-            console.log(err)
             if (err.name === 'TokenExpiredError') {
                 next(new badRequest("Token expirado"))
             } else if (err.name === 'JsonWebTokenError') {

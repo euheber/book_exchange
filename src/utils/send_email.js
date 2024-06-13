@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer"
-
+import generateToken from "../utils/generate_token.js"
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -12,10 +12,12 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-const sendEmail = async (username, userEmail, token) => {
+const sendEmail = async (username, email, id) => {
+    const token = await generateToken({username, email, id})
+
     const emailConfig = {
         from: `Heber <${process.env.USER}>`,
-        to: `${userEmail}`,
+        to: `${email}`,
         subject: "Confirmação de cadastro",
         html: `Olá, ${username} Para registrar seus livros enviados: ${token}`,
     }

@@ -4,16 +4,15 @@ import prisma from "../lib/prismaClient.js"
 import sendEmail from "../utils/send_email.js"
 import generateToken from "../utils/generate_token.js"
 
-
 async function register_books(req, res, next) {
     const { name, email } = req.body
- 
+
     try {
         const user = await prisma.user.create({ data: { name, email } })
-        const token = await generateToken({name, email, id:user.id})
-        await sendEmail( name, email, token)
 
-        res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, link: "Este não é seu email? Clique aqui e atualize" })
+        await sendEmail(name, email, user.id)
+
+        res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, update_email: `http://localhost:3000/api/v1/user/email/patch/${email}/${await generateToken({ name: user.name, email: user.email, id: user.id })}` })
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
 
