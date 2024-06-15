@@ -13,6 +13,6 @@ router.post("/book", request_validation, register_books)
 router.post('/user', request_validation, register_user)
 router.get('/user/:token', auth, getUserInfo)
 // router.get("/user/info", recycled_info)
-router.patch("/user/email/patch/:email/:token", request_validation, updateEmail)
+router.patch("/user/email/:token", request_validation, auth, updateEmail)
 
 export default router

@@ -5,9 +5,9 @@ import { badRequest } from "../errors/index.js"
 
 
 const register_books = async (req, res, next) => {
-    const { books, userId } = req.body
+    const { books, decodedToken } = req.body
 
-    const editedBooks = books.map(book => { return { ...book, userId } })
+    const editedBooks = books.map(book => { return { ...book, userId: decodedToken.id } })
 
     try {
         if (editedBooks.length > 1) {
@@ -15,12 +15,14 @@ const register_books = async (req, res, next) => {
         } else {
             await prisma.books.create({ data: editedBooks[0] })
         }
-        res.status(StatusCodes.OK).json({msg: "Livros cadastrados com sucesso", code: `Você pode acompanhar o status do seu pedido com esse código ou acessando seus dados via ID de usuário`})
+        res.status(StatusCodes.OK).json({ msg: "Livros cadastrados com sucesso", code: `Você pode acompanhar o status do seu pedido com esse código ou acessando seus dados via ID de usuário` })
     } catch (e) {
 
-        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") next(new badRequest("Id de usuário incorreto ou não existe"))
-              
-        
+        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
+            next(new badRequest("Id de usuário incorreto ou não existe"))
+        }
+
+
     }
 }
 

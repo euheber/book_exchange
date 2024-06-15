@@ -13,13 +13,13 @@ const transporter = nodemailer.createTransport({
 })
 
 const sendEmail = async (username, email, id) => {
-    const token = await generateToken({username, email, id})
+    const token = await generateToken({ username, email, id })
 
     const emailConfig = {
         from: `Heber <${process.env.USER}>`,
         to: `${email}`,
         subject: "Confirmação de cadastro",
-        html: `Olá, ${username} Para registrar seus livros enviados: ${token}`,
+        html: `Olá, ${username} Para registrar seus livros enviados aqui: <a href=http://localhost:3000/api/v1/book/${token}>Aqui<a/:`,
     }
 
     return new Promise((resolve, reject) => {

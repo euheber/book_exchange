@@ -4,7 +4,6 @@ import prisma from "../lib/prismaClient.js"
 
 const getUserInfo = async (req, res, next) => {
     const { id, email, name } = req.body
-    console.log(id, email, name)
     try {
 
         const user = await prisma.user.findUnique({

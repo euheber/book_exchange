@@ -2,25 +2,26 @@ import { StatusCodes } from "http-status-codes"
 import { badRequest } from "../errors/index.js"
 import { Prisma } from "@prisma/client"
 import prisma from "../lib/prismaClient.js"
+import sendEmail from "../utils/send_email.js"
+
 
 const updateEmail = async (req, res, next) => {
-    const { email, updatedEmail } = req.body
-    const token = req.params
+    const { updatedEmail, decodedToken } = req.body
     try {
         await prisma.user.update({
             where: {
-                email
+                email: decodedToken.email
             },
             data: {
                 email: updatedEmail
             }
         })
-
+        await sendEmail(decodedToken.name, updatedEmail, decodedToken.id)
         res.status(StatusCodes.OK).json({ msg: "Email atualizado com sucesso. Verifique sua caixa de entrada." })
     } catch (e) {
 
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            next(new badRequest("Não foi possível atualizar o estado do usuário: Email não consta no nosso banco de dados"))
+            return next(new badRequest("Não foi possível atualizar o estado do usuário: Email não consta no nosso banco de dados. Você tem cer certeza que esse é o endereço cadastrado?"))
         }
     }
 }
