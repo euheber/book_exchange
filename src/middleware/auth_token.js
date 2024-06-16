@@ -11,7 +11,9 @@ const auth = (req, res, next) => {
                 next(new badRequest("Token inválido"))
             }
         } else {
+
             req.body.decodedToken = decodedToken
+            req.body.token = token
             next()
         }
     })

@@ -5,16 +5,18 @@ import { badRequest } from "../errors/index.js"
 
 
 const register_books = async (req, res, next) => {
-    const { books, decodedToken } = req.body
-
+    const { books, decodedToken, token } = req.body
     const editedBooks = books.map(book => { return { ...book, userId: decodedToken.id } })
-
+    console.log(token)
     try {
         if (editedBooks.length > 1) {
             await prisma.books.createMany({ data: editedBooks })
+            await prisma.invalidTokens.create({ data: { token } })
+
         } else {
             await prisma.books.create({ data: editedBooks[0] })
         }
+
         res.status(StatusCodes.OK).json({ msg: "Livros cadastrados com sucesso", code: `Você pode acompanhar o status do seu pedido com esse código ou acessando seus dados via ID de usuário` })
     } catch (e) {
 
@@ -22,7 +24,7 @@ const register_books = async (req, res, next) => {
             next(new badRequest("Id de usuário incorreto ou não existe"))
         }
 
-
+        
     }
 }
 

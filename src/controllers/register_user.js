@@ -17,7 +17,7 @@ async function register_books(req, res, next) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
 
             if (e.code === 'P2002') {
-                return next(new badRequest('Usuário já cadastrado'))
+                return next(new badRequest('Usuário já cadastrado.'))
             }
         }
 

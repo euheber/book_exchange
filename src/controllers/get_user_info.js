@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes"
 import prisma from "../lib/prismaClient.js"
 
 const getUserInfo = async (req, res, next) => {
-    const { id, email, name } = req.body
+    const { id } = req.body
     try {
 
         const user = await prisma.user.findUnique({
@@ -13,7 +13,7 @@ const getUserInfo = async (req, res, next) => {
                 name: true,
                 email: true,
             },
-            
+
         })
 
         if (user != null) {

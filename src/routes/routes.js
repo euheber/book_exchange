@@ -9,7 +9,7 @@ import auth from "../middleware/auth_token.js"
 
 const router = Router()
 
-router.post("/book", request_validation, register_books)
+router.post("/book/:token", request_validation, auth, register_books)
 router.post('/user', request_validation, register_user)
 router.get('/user/:token', auth, getUserInfo)
 // router.get("/user/info", recycled_info)
