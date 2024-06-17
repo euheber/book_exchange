@@ -1,8 +1,15 @@
 import jwt from "jsonwebtoken"
+import prisma from "../lib/prismaClient.js"
 import { badRequest } from "../errors/index.js"
-const auth = (req, res, next) => {
+
+const auth = async (req, res, next) => {
     const { token } = req.params
-    jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
+    const isTokenInvalid = await prisma.invalidTokens.findUnique({ where: { token } })
+
+    if (isTokenInvalid) {
+        return next(new badRequest("Token expirado ou inválido"))
+    }
+    jwt.verify(token, process.env.SECRET, async (err, decodedToken) => {
         if (err) {
 
             if (err.name === 'TokenExpiredError') {
@@ -11,9 +18,9 @@ const auth = (req, res, next) => {
                 next(new badRequest("Token inválido"))
             }
         } else {
-
+            await prisma.invalidTokens.create({ data: { token } })
             req.body.decodedToken = decodedToken
-            req.body.token = token
+
             next()
         }
     })
