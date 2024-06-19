@@ -10,7 +10,6 @@ const register_books = async (req, res, next) => {
     try {
         if (editedBooks.length > 1) {
             await prisma.books.createMany({ data: editedBooks })
-         
 
         } else {
             await prisma.books.create({ data: editedBooks[0] })

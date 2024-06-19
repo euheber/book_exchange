@@ -19,7 +19,7 @@ const sendEmail = async (username, email, id) => {
         from: `Heber <${process.env.USER}>`,
         to: `${email}`,
         subject: "Confirmação de cadastro",
-        html: `Olá, ${username} Para registrar seus livros enviados aqui: <a href=http://localhost:3000/api/v1/book/${token}>Aqui<a/:`,
+        html: `Olá, ${username} Para registrar seus livros enviados aqui: <a href=http://localhost:3000/api/v1/book/${token}>Aqui<a/>`,
     }
 
     return new Promise((resolve, reject) => {

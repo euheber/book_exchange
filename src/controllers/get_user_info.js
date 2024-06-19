@@ -12,6 +12,7 @@ const getUserInfo = async (req, res, next) => {
                 id: true,
                 name: true,
                 email: true,
+                books: true
             },
 
         })
