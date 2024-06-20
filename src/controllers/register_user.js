@@ -7,11 +7,11 @@ import generateTrackingCode from "../utils/generate_tracking_code.js"
 
 
 async function register_books(req, res, next) {
-    const { name, email, city } = req.body
+    const { name, email, state } = req.body
 
     try {
         const tracking_code = generateTrackingCode()
-        const user = await prisma.user.create({ data: { name, email, tracking_code, city } })
+        const user = await prisma.user.create({ data: { name, email, tracking_code, state } })
 
         await sendEmail(name, email, user.id)
         const token = await generateToken({ name: user.name, email: user.email, id: user.id })
