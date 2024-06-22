@@ -1,38 +1,25 @@
 import { badRequest } from "../errors/index.js";
-import checkEmail from "../utils/check_if_email_is_valid.js"
-import validStates from "../utils/valid_states.js";
+import checkBooks from "../utils/check_books.js";
+import checkUsersInfo from "../utils/check_users_info.js";
 
 const request_validation = async (req, res, next) => {
-    const { books, ...rest } = req.body;
-    const invalidBooks = [];
-    const getObjectFields = Object.keys(rest).filter(item => rest[item] === "");
+    const { books, ...userInfo } = req.body;
+    const invalidBooks = books ? checkBooks(books) : []
+    const checkForEmptyFields = Object.keys(userInfo).filter(item => userInfo[item] === "");
 
-    if (books) {
-        books.forEach(book => {
-            if (!book.name || !book.book_id || !book.publisher) {
-                invalidBooks.push(book);
-            }
-        });
-
-        if (invalidBooks.length > 0) {
-            return next(new badRequest(`Você precisa preencher todos os campos dos livros que serão enviados.`));
-        }
-    }
-
-    if (rest.email) {
-        if (!checkEmail(rest.email)) {
-            return next(new badRequest("Ofereça um email válido para contato"));
-        }
+    if (invalidBooks.length > 0) {
+        return next(new badRequest("Você precisa preencher todos os campos"))
     }
 
 
-    if (getObjectFields.length > 0) {
-        return next(new badRequest(`Você precisa preencher os campos: ${getObjectFields.join(', ')}`));
+    if (checkForEmptyFields.length > 0) {
+        return next(new badRequest(`Você precisa preencher os campos: ${checkForEmptyFields.join(', ')}`));
     }
 
-    if (!validStates(rest.state)) {
+    const usersInfoValidation = checkUsersInfo(userInfo)
 
-        return next(new badRequest("Você precisa enviar um estado válido"))
+    if (usersInfoValidation) {
+        return next(usersInfoValidation)
     }
 
     next();
