@@ -3,15 +3,14 @@ import { StatusCodes } from "http-status-codes"
 import prisma from "../lib/prismaClient.js"
 
 const getUserInfo = async (req, res, next) => {
-    const { id } = req.body
+    const { tracking_code } = req.body
     try {
 
         const user = await prisma.user.findUnique({
-            where: { id },
+            where: { tracking_code },
             select: {
                 id: true,
                 name: true,
-                email: true,
                 books: true
             },
 

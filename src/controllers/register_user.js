@@ -12,8 +12,8 @@ async function register_books(req, res, next) {
     try {
         const tracking_code = generateTrackingCode()
         const user = await prisma.user.create({ data: { name, email, tracking_code, state } })
-
         await sendEmail(name, email, user.id)
+
         const token = await generateToken({ name: user.name, email: user.email, id: user.id })
         res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, update_email: `http://localhost:3000/api/v1/user/email/${token}` })
     } catch (e) {
@@ -23,7 +23,7 @@ async function register_books(req, res, next) {
                 return next(new badRequest('Usuário já cadastrado.'))
             }
         }
-
+        return next(new badRequest("Tivemos um problema ao cadastrar seu email"))
     }
 }
 
