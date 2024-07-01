@@ -5,7 +5,7 @@ import prisma from "../lib/prismaClient.js"
 import sendEmail from "../utils/send_email.js"
 
 
-const updateEmail = async (req, res, next) => {
+async function updateEmail(req, res, next) {
     const { updatedEmail, decodedToken } = req.body
     try {
         await prisma.user.update({
@@ -21,7 +21,7 @@ const updateEmail = async (req, res, next) => {
     } catch (e) {
 
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            return next(new badRequest("Não foi possível atualizar o estado do usuário: Email não consta no nosso banco de dados. Você tem cer certeza que esse é o endereço cadastrado?"))
+            return next(new badRequest("Não foi possível atualizar o email do usuário: Email não consta no nosso banco de dados. Você tem certeza que esse é o endereço cadastrado?"))
         }
     }
 }

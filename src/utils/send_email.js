@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 const getHTMLTemplate = async (username, token) => {
     const templatePath = path.join(__dirname, "..", "templates", "email.html");
-    let htmlContent = await fs.promises.readFile(templatePath, "utf8");
+    let htmlContent = await fs.promises.readFile(templatePath, "utf-8");
 
     htmlContent = htmlContent.replace("{username}", username);
     htmlContent = htmlContent.replace("{token}", token);
@@ -43,9 +43,10 @@ const sendEmail = async (username, email, id) => {
     return new Promise((resolve, reject) => {
         transporter.sendMail(emailConfig, (error, info) => {
             if (error) {
-                reject()
+                console.log(error)
+                reject(error)
             } else {
-                resolve()
+                resolve(info)
             }
         })
     })

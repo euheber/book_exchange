@@ -9,8 +9,8 @@ import generateTrackingCode from "../utils/generate_tracking_code.js"
 async function register_books(req, res, next) {
     const { name, email, state } = req.body
 
+    const tracking_code = generateTrackingCode()
     try {
-        const tracking_code = generateTrackingCode()
         const user = await prisma.user.create({ data: { name, email, tracking_code, state } })
         await sendEmail(name, email, user.id)
 
@@ -23,7 +23,7 @@ async function register_books(req, res, next) {
                 return next(new badRequest('Usuário já cadastrado.'))
             }
         }
-        return next(new badRequest("Tivemos um problema ao cadastrar seu email"))
+        return next(new badRequest("Tivemos um problema ao fazer seu cadastro. Tente novamente mais tarde"))
     }
 }
 
