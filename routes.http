@@ -1,19 +1,19 @@
 POST http://localhost:3000/api/v1/user
 Content-Type: application/json
+Connection: keep-alive
 
 { 
     "name": "Heber Robert",
-    "email": "euheber1@gmail.com"
+    "email": "euheber1@gmail.com",
+    "state": "SP"
 }
 
 ###
 
-POST http://localhost:3000/api/v1/book
+POST http://localhost:3000/api/v1/book/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlYmVyIFJvYmVydCIsImVtYWlsIjoiZXVoZWJlcjFAZ21haWwuY29tIiwiaWQiOiJjZTgyM2RhYy1iMmUwLTRmODMtOWFiNS1mNzE5ZDJhYTkxOWUiLCJpYXQiOjE3MTkwOTUwNjcsImV4cCI6MTcxOTA5ODY2N30.0N0NfYmxrgKq8DBx81jyCR8Cbbs7tq3h7kK6Wj1ePfU
 Content-Type: application/json
 
 { 
-    "userId": "858f606f-586f-4763-b1e1-dfb42c4b45a1",
-    "tracking_code": "HAS13H8HAS",
     "books": [
      {
       "name": "Lovecraft stories",
@@ -35,19 +35,22 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/api/v1/user/858f606f-586f-4763-b1e1-dfb42c4b45a1
+GET http://localhost:3000/api/v1/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSGViZXIgUm9iZXJ0IiwiZW1haWwiOiJldWhlYmVyMUBnbWFpbC5jb20iLCJpZCI6ImY2YWYwNTViLTdkODUtNDRiYy04YzNhLTJjMDkyM2VlYjNkNyIsImlhdCI6MTcxODE0MjEwNiwiZXhwIjoxNzE4MTQ1NzA2fQ.T0uJSDgmksCA89QyIkH-SzzBYGau0NwRmaxidMlR_2A
+
 ###
 GET http://localhost:3000/api/v1/user/info
 ###
-PATCH http://localhost:3000/api/v1/user/email/confirm
+PATCH http://localhost:3000/api/v1/user/email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSGViZXIgUm9iZXJ0IiwiZW1haWwiOiJldWhlYmVyQGdtYWlsLmNvbSIsImlkIjoiOWFiMjU0MDgtMTk0OC00OWE1LTg3NWMtYmVlZjM2MWFhZWU4IiwiaWF0IjoxNzE4NDczMjg0LCJleHAiOjE3MTg0NzY4ODR9.Cavg_hTxPoLo5xQ3LaBbHd024WTjLm8oqRAsDKzhACY
 Content-Type: application/json
 
 { 
-  "code": "95a5b599-4fe8-4f4a-bc13-cc937527e1d3"
+  "updatedEmail": "euheber1@gmail.com"
 }
 
+PATCH http://localhost:3000/api/v1/admin/localhost:3000/api/v1/user
+Content-Type:  application/application/json
 
 
-
-1 - cadastrar usuário. enviando {nome, email, senha?}
-2 - confirmar usuário via email. e recebe link único para cadastro
+{ 
+  "tracking_code": "DU608697986BR"
+}

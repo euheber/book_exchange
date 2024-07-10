@@ -23,7 +23,7 @@ async function register_books(req, res, next) {
                 return next(new badRequest('Usuário já cadastrado.'))
             }
         }
-        return next(new badRequest("Tivemos um problema ao fazer seu cadastro. Tente novamente mais tarde"))
+        return next(new Error("Tivemos um problema ao fazer seu cadastro. Tente novamente mais tarde"))
     }
 }
 

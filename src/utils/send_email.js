@@ -40,18 +40,11 @@ const sendEmail = async (username, email, id) => {
         html: htmlContent,
     }
 
-    return new Promise((resolve, reject) => {
-        transporter.sendMail(emailConfig, (error, info) => {
-            if (error) {
-                console.log(error)
-                reject(error)
-            } else {
-                resolve(info)
-            }
-        })
-    })
+    transporter.sendMail(emailConfig)
 
 }
 
+
+// 
 
 export default sendEmail
