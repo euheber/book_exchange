@@ -3,10 +3,17 @@ import { badRequest } from "../errors/index.js"
 import { Prisma } from "@prisma/client"
 import prisma from "../lib/prismaClient.js"
 import sendEmail from "../lib/send_email.js"
+import { validationResult } from "express-validator"
 
 
 async function updateEmail(req, res, next) {
+
+    const result = validationResult(req)
+
+    if(!result.isEmpty()){ return next(new badRequest("You need to provide the right infos", result))}
+
     const { updatedEmail, decodedToken } = req.body
+
     try {
         await prisma.user.update({
             where: {

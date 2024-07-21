@@ -3,7 +3,7 @@ import prisma from "../lib/prismaClient.js"
 import { badRequest } from "../errors/index.js"
 
 const auth = async (req, res, next) => {
-    const { token } = req.params
+    const token = req.headers.authorization.split(' ')[1]
     const isTokenInvalid = await prisma.invalidTokens.findUnique({ where: { token } })
 
     if (isTokenInvalid) {

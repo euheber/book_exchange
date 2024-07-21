@@ -5,15 +5,16 @@ import sendEmail from "../lib/send_email.js"
 import generateToken from "../utils/generate_token.js"
 import generateTrackingCode from "../utils/generate_tracking_code.js"
 import {validationResult} from "express-validator"
-import { StatusCodes } from "http-status-codes"
+
 
 async function register_books(req, res, next) {
-    const { name, email, state } = req.body
-    const result = validationResult(req)
 
-    if(!result.isEmpty()){
-       return res.status(StatusCodes.BAD_REQUEST).send(result)
-    }
+    const result = validationResult(req)
+    console.log(result)
+    if(!result.isEmpty()){ return next(new badRequest("You need to provide the right infos", result))}
+
+    const { name, email, state } = req.body
+ 
     const tracking_code = generateTrackingCode()
     try {
         const user = await prisma.user.create({ data: { name, email, tracking_code, state } })

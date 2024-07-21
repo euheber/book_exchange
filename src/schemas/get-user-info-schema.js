@@ -1,8 +1,8 @@
 export const getUserInfoSchema = { 
-    token: { 
-        isString: true,
+    tracking_code : { 
+        isString: {errorMessage: "Tracking code must be a string"},
         notEmpty: { 
-            errorMessage: 'Token params is a required field and cannot be empty'
+            errorMessage: 'Tracking code is a required field and cannot be empty'
         }
     }
 }

@@ -20,8 +20,6 @@ async function updateUserStatus(req, res, next) {
         if (e instanceof PrismaClientKnownRequestError) {
             return next(new badRequest("Código de rastreio incorreto ou inexistente"))
         }
-
-        next(e)
     }
 }
 

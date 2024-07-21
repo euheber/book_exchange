@@ -22,7 +22,7 @@ const getUserInfo = async (req, res, next) => {
             throw new badRequest("Usuário não encontrado.")
         }
     } catch (e) {
-        next(e)
+        return next(e)
     }
 }
 

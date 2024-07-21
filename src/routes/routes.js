@@ -15,10 +15,12 @@ import { updateUserStatusSchema} from  "../schemas/update-user-status-schema.js"
 const router = Router()
 
 router.post('/user', checkSchema(registerUserSchema, ['body']), register_user)
-router.post("/book/:token", checkSchema(registerBooksSchema, ['body']), auth, register_books)
-router.patch("/user/email/:token", checkSchema(updateUserEmailSchema, ['body', 'params']), auth, updateEmail)
+router.post("/book", checkSchema(registerBooksSchema, ['body', 'headers']),auth, register_books) 
+router.patch("/user/email", checkSchema(updateUserEmailSchema, ["body", "headers"]), updateEmail) 
 router.patch("/admin/user/status", checkSchema(updateUserStatusSchema, ['body']), updateUserStatus)
-router.get('/user/:token',  checkSchema(getUserInfoSchema, ['params']), auth, getUserInfo)
+router.get('/user', checkSchema(getUserInfoSchema, ['body']), getUserInfo) 
+
+router.get("/frontend", (req, res) => { res.send("rota de teste para o front")})
 // router.get("/user/info", recycled_info)
 
 export default router
