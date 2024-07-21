@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes"
 import { badRequest } from "../errors/index.js"
 import { Prisma } from "@prisma/client"
 import prisma from "../lib/prismaClient.js"
-import sendEmail from "../utils/send_email.js"
+import sendEmail from "../lib/send_email.js"
 
 
 async function updateEmail(req, res, next) {

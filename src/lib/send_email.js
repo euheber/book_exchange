@@ -40,11 +40,10 @@ const sendEmail = async (username, email, id) => {
         html: htmlContent,
     }
 
-    transporter.sendMail(emailConfig)
+    return transporter.sendMail(emailConfig)
 
 }
 
 
-// 
 
 export default sendEmail

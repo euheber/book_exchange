@@ -5,9 +5,8 @@ import { StatusCodes } from "http-status-codes";
 
 async function updateUserStatus(req, res, next) {
     const { tracking_code, user_state } = req.body
-
     try {
-        prisma.user.update({
+       const user = prisma.user.update({
             where: {
                 tracking_code
             },
@@ -15,7 +14,6 @@ async function updateUserStatus(req, res, next) {
                 status: user_state
             }
         })
-
 
         res.status(StatusCodes.OK).json({ msg: "Usuário atualizado com sucesso. Você pode enviar os voucher agora." })
     } catch (e) {
