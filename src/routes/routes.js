@@ -14,13 +14,14 @@ import { getUserInfoSchema } from "../schemas/get-user-info-schema.js";
 import { updateUserStatusSchema} from  "../schemas/update-user-status-schema.js"
 const router = Router()
 
-router.post('/user', checkSchema(registerUserSchema, ['body']), register_user)
-router.post("/book", checkSchema(registerBooksSchema, ['body', 'headers']),auth, register_books) 
-router.patch("/user/email", checkSchema(updateUserEmailSchema, ["body", "headers"]), updateEmail) 
+router.post('/user', checkSchema(registerUserSchema, ['body']), register_user) //*ok
+router.post("/book", checkSchema(registerBooksSchema, ['body']), auth, register_books)  //*ok
+router.patch("/user/email", checkSchema(updateUserEmailSchema, [ "body"]), auth, updateEmail) 
 router.patch("/admin/user/status", checkSchema(updateUserStatusSchema, ['body']), updateUserStatus)
 router.get('/user', checkSchema(getUserInfoSchema, ['body']), getUserInfo) 
 
 router.get("/frontend", (req, res) => { res.send("rota de teste para o front")})
+
 // router.get("/user/info", recycled_info)
 
 export default router

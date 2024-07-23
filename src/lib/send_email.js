@@ -7,16 +7,15 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
+const account = await nodemailer.createTestAccount();
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    service: "gmail",
-    secure: true,
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false,
     auth: {
-        user: process.env.USER,
-        pass: process.env.PASS
-    }
+      user: account.user,
+      pass: account.pass,
+    },
 })
 
 const getHTMLTemplate = async (username, token) => {
@@ -34,14 +33,14 @@ const sendEmail = async (username, email, id) => {
     const htmlContent = await getHTMLTemplate(username, token)
 
     const emailConfig = {
-        from: `Heber <${process.env.USER}>`,
+        from: { name: "Equipe Ecolib", address: "ecolib@mail.com"},
         to: `${email}`,
         subject: "Confirmação de cadastro",
         html: htmlContent,
     }
-
-    return transporter.sendMail(emailConfig)
-
+    console.log("mandando email?")
+    const message = await transporter.sendMail(emailConfig)
+    console.log(nodemailer.getTestMessageUrl(message));
 }
 
 

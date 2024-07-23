@@ -13,7 +13,7 @@ export const registerBooksSchema =  {
   },
   'books.*.book_id': {
     isString: {
-      errorMessage: 'Book ID must be a string'
+      errorMessage: 'Book ID must be a string' 
     },
     notEmpty: { errorMessage: 'book_id is required and cannot be empty' }
   },
@@ -23,6 +23,4 @@ export const registerBooksSchema =  {
     },
     notEmpty: { errorMessage: 'publisher field is required and cannot be empty' }
   },
-  trim: true,
-  escape: true
 };
