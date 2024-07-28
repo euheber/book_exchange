@@ -1,12 +1,12 @@
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import prisma from "../lib/prismaClient.js";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { badRequest } from "../errors/index.js";
 import { StatusCodes } from "http-status-codes";
 
 async function updateUserStatus(req, res, next) {
     const { tracking_code, user_state } = req.body
     try {
-       const user = prisma.user.update({
+        prisma.user.update({
             where: {
                 tracking_code
             },
@@ -15,11 +15,13 @@ async function updateUserStatus(req, res, next) {
             }
         })
 
-        res.status(StatusCodes.OK).json({ msg: "Usuário atualizado com sucesso. Você pode enviar os voucher agora." })
+        res.status(StatusCodes.OK).json({ msg: "Usuário atualizado com sucesso." })
     } catch (e) {
         if (e instanceof PrismaClientKnownRequestError) {
             return next(new badRequest("Código de rastreio incorreto ou inexistente"))
         }
+
+        return next(new Error(e))
     }
 }
 

@@ -3,10 +3,12 @@ import  {validStates}  from "../utils/valid_states.js"
 export const registerUserSchema = { 
     name: {
         isString:{ errorMessage: "Name must be a string"},
-        notEmpty: { errorMessage: 'Name is required and cannot be empty'}
+        notEmpty: { errorMessage: 'Name is required and cannot be empty'},
+        isAlpha: { errorMessage: 'Name must contain only alphabetic characters'},
+        isLength: { options: { min: 3 }, errorMessage: 'Name must be at least 3 characters long'}
     }, 
     email:{ 
-        isEmail: {errorMessage: "Must be an emai,"},
+        isEmail: {errorMessage: "Must be an email,"},
         isString: true,
         notEmpty: { errorMessage: 'Name is required and cannot be empty'}
     }, 

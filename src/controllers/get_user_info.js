@@ -2,6 +2,8 @@ import { badRequest } from "../errors/index.js"
 import { StatusCodes } from "http-status-codes"
 import prisma from "../lib/prismaClient.js"
 import { validationResult } from "express-validator"
+
+
 const getUserInfo = async (req, res, next) => {
 
     const result = validationResult(req)
@@ -29,6 +31,8 @@ const getUserInfo = async (req, res, next) => {
         } else {
             return next(new badRequest("Usuário não encontrado.")) 
         }
+
+        return next(new Error())
    
 }
 

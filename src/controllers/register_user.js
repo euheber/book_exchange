@@ -11,8 +11,8 @@ async function register_books(req, res, next) {
 
     const result = validationResult(req)
 
+    
     if(!result.isEmpty()){ return next(new badRequest("You need to provide the right infos", result))}
-
     const { name, email, state } = req.body
  
     const tracking_code = generateTrackingCode()
@@ -21,14 +21,13 @@ async function register_books(req, res, next) {
         const token = await generateToken({ name: user.name, email: user.email, id: user.id })
         await sendEmail(name, email, user.id)
 
-        
         res.status(200).json({ msg: `Enviamos um email com os dados para confirmação do cadastro para o endereço: ${email}`, update_email: `http://localhost:3000/api/v1/user/email/${token}` })
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
             
             return next(new badRequest('Usuário já cadastrado.'))
         }
-        return next(new Error("Tivemos um problema ao fazer seu cadastro. Tente novamente mais tarde"))
+        return next(new Error(e))
     }
 }
 

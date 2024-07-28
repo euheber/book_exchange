@@ -30,6 +30,8 @@ async function updateEmail(req, res, next) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             return next(new badRequest("Não foi possível atualizar o email do usuário: Email não consta no nosso banco de dados. Você tem certeza que esse é o endereço cadastrado?"))
         }
+
+        return next(new Error(e))
     }
 }
 
