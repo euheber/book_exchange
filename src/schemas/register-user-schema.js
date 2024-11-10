@@ -4,7 +4,7 @@ export const registerUserSchema = {
     name: {
         isString:{ errorMessage: "Name must be a string"},
         notEmpty: { errorMessage: 'Name is required and cannot be empty'},
-        isAlpha: { errorMessage: 'Name must contain only alphabetic characters'},
+        isAlpha: {options: ['pt-BR', {ignore: ' '}] ,errorMessage: 'Name must contain only alphabetic characters'},
         isLength: { options: { min: 3 }, errorMessage: 'Name must be at least 3 characters long'}
     }, 
     email:{ 

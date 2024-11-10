@@ -4,7 +4,7 @@ import { badRequest } from "../errors/index.js"
 
 const auth = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1]
-    
+
     if (!token) {
         return next(new badRequest("Forneça um token válido"))
     }
@@ -18,14 +18,14 @@ const auth = async (req, res, next) => {
         if (err) {
 
             if (err.name === 'TokenExpiredError') {
-                next(new badRequest("Token expired"))
+              return next(new badRequest("Token expired"))
             } else if (err.name === 'JsonWebTokenError') {
-                next(new badRequest("Invalid token"))
+              return next(new badRequest("Invalid token"))
             }
         } else {
 
             req.body.decodedToken = decodedToken
-            
+
             next()
         }
     })

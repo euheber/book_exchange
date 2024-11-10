@@ -13,22 +13,22 @@ async function updateEmail(req, res, next) {
     if(!result.isEmpty()){ return next(new badRequest("You need to provide the right infos", result))}
 
     const { updatedEmail, decodedToken } = req.body
-
+    console.log({ updatedEmail, decodedToken })
     try {
         await prisma.user.update({
             where: {
-                email: decodedToken.email
+                id: decodedToken.id
             },
             data: {
                 email: updatedEmail
             }
         })
-        await sendEmail(decodedToken.name, updatedEmail, decodedToken.id)
+        await sendEmail(decodedToken.username, updatedEmail, decodedToken.id)
         res.status(StatusCodes.OK).json({ msg: "Email atualizado com sucesso. Verifique sua caixa de entrada." })
     } catch (e) {
 
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            return next(new badRequest("Não foi possível atualizar o email do usuário: Email não consta no nosso banco de dados. Você tem certeza que esse é o endereço cadastrado?"))
+            return next(new badRequest("Não foi possível atualizar as infomrações usuário"))
         }
 
         return next(new Error(e))

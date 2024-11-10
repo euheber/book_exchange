@@ -27,9 +27,9 @@ const getUserInfo = async (req, res, next) => {
         })
 
         if (user != null) {
-            res.status(StatusCodes.OK).json(user)
+          return  res.status(StatusCodes.OK).json(user)
         } else {
-            return next(new badRequest("Usuário não encontrado.")) 
+            next(new badRequest("Usuário não encontrado.")) 
         }
 
         return next(new Error())
